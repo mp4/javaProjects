@@ -98,6 +98,16 @@ public class Poulproj02 {
         System.out.println("2) rabbit (factorial)");
         System.out.println("3) exit");
         choice = getValidMenuInt(keyboard);
+        
+        switch(choice)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
     final static int MINMENUCHOICE = 1;
     final static int MAXMENUCHOICE = 3;
@@ -125,5 +135,9 @@ public class Poulproj02 {
         {
             return getValidMenuInt(keyboard);
         }
+    }
+    public static void GetInputForAndRunC()
+    {
+        
     }
 }
