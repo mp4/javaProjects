@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class Poulproj02 {
 
     /**
-     * @param args the command line arguments
+     * prints a greeting initializes a scanner and calls the menu
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {    
         System.out.println("welcome to the recurion testing program");
         Scanner keyboard = new Scanner(System.in);
         menu(keyboard);
@@ -101,7 +101,8 @@ public class Poulproj02 {
         {
             case 1:
                 c(getPositiveInt("please enter a value for n:", keyboard),
-                        getPositiveInt("please enter a value for k:", keyboard));
+                        getPositiveInt("please enter a value for k:", keyboard)
+                        );
                 menu(keyboard);
                 break;
             case 2:
@@ -110,6 +111,7 @@ public class Poulproj02 {
                 menu(keyboard);
                 break;
             case 3:
+                //fallout of the menu
                 break;
         } 
     }
