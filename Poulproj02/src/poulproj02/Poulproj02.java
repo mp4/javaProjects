@@ -3,7 +3,6 @@
  * by marsh poulson 9/04/2013
  */
 package poulproj02;
-import java.io.*;
 import java.util.Scanner;
 /**
  *
@@ -18,9 +17,7 @@ public class Poulproj02 {
         // TODO code application logic here
         System.out.println("welcome to the recurion testing program");
         Scanner keyboard = new Scanner(System.in);
-        Menu(keyboard);
-        c(4,2);
-        rabbit(5);
+        menu(keyboard);
     }
     
     private static int stackedRabbitCalls = 0;
@@ -88,26 +85,33 @@ public class Poulproj02 {
     /*
      * this function accepts a scanner which should already be directed to the 
      * standard input device it will output a menu and then call the 
-     * appropraiate functions
+     * appropraiate functions including itself
      */
-    public static void Menu(Scanner keyboard)
+    public static void menu(Scanner keyboard)
     {
         int choice;
-        System.out.println("menu");
+        System.out.println("\nmenu");
         System.out.println("1) c (spock dilema)");
         System.out.println("2) rabbit (factorial)");
         System.out.println("3) exit");
         choice = getValidMenuInt(keyboard);
+        System.out.println("");
         
         switch(choice)
         {
             case 1:
+                c(getPositiveInt("please enter a value for n:", keyboard),
+                        getPositiveInt("please enter a value for k:", keyboard));
+                menu(keyboard);
                 break;
             case 2:
+                rabbit(getPositiveInt("please enter a value to run rabbit with:"
+                        , keyboard));
+                menu(keyboard);
                 break;
             case 3:
                 break;
-        }
+        } 
     }
     final static int MINMENUCHOICE = 1;
     final static int MAXMENUCHOICE = 3;
@@ -136,8 +140,30 @@ public class Poulproj02 {
             return getValidMenuInt(keyboard);
         }
     }
-    public static void GetInputForAndRunC()
+    /*
+     * gets a positve integer from the user and returns it it prompts the user 
+     * with the message keyboard must be an initialized scanner instance
+     */
+    public static int getPositiveInt(String message, Scanner keyboard)
     {
-        
+        try
+        {
+            int value;
+            System.out.println(message);
+            value = keyboard.nextInt();
+            if(value < BADVALUESBEGIN)
+            {
+                System.out.println("please enter a positive value");
+                return getPositiveInt(message, keyboard);
+            }
+            //else
+            //base case
+            return value;
+        }
+        catch(Exception e)
+        {
+            return getPositiveInt(message, keyboard);
+        }
     }
+    final static int BADVALUESBEGIN = 0;
 }
