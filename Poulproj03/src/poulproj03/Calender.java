@@ -1,5 +1,7 @@
 /*
- * by marsh poulson 9/10/2013
+ * containd the calender class which is designed to store, increment and print 
+ * a date
+ * by marsh poulson 9/12/2013
  */
 package poulproj03;
 
@@ -20,6 +22,7 @@ public class Calender {
     private int month_;
     private int year_;
     
+    //using constants because enums are not represented as integers in java
     public static final int JAN=1, FEB=2, MAR=3, APR=4, MAY=5, JUN=6, JUL=7, 
             AUG=8, SEPT=9, OCT=10, NOV=11, DEC=12;
     /*
@@ -133,7 +136,7 @@ public class Calender {
      */
     public String toStringNumeralsAndSlashes()
     {
-        return month_ + "/" + day_ +"/"+year_;
+        return month_ + "/" + day_ + "/" + year_;
     }
     /*
      * returns the date as a string in form M D, Y where the month is printed
@@ -184,13 +187,34 @@ public class Calender {
     }
 
     /*
+     * returns the number of days in a given month and year, returns 31 if month 
+     * is out of bounds
+     */
+    public static int numberOfDays(int month, int year)
+    {
+        switch(month)
+        {
+            case APR:
+            case JUN:
+            case SEPT:
+            case NOV:
+                return 30;
+            case FEB:
+                if(LeapYear(year))
+                    return 29;
+                return 28;
+            default:
+                return 31;
+        }
+    }
+    /*
      * returns whether or not the parameter year is a leap year
      * based on http://www.timeanddate.com/date/leapyear.html
      * The year is evenly divisible by 4;
      * If the year can be evenly divided by 100, it is NOT a leap year, unless;
      * The year is also evenly divisible by 400. Then it is a leap year.
      */
-    private boolean LeapYear(int year) 
+    private static boolean LeapYear(int year) 
     {
         return (((year % 4) == 0) && (!(year % 100 == 0))) || (year % 400 == 0);
     }

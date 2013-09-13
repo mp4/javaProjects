@@ -1,5 +1,7 @@
 /*
- * by marsh poulson 9/10/2013
+ * this is the driver program to demonstrate my calender class and allow the
+ * user to test it by allowing them to input values
+ * by marsh poulson 9/12/2013
  */
 package poulproj03;
 
@@ -38,12 +40,7 @@ public class Poulproj03 {
             case 1:
                 try
                 {
-                    calender = new Calender(getPositiveInt(
-                            "please enter the current day:", keyboard),
-                            getPositiveInt("please enter the current month",
-                            keyboard),
-                            getPositiveInt("please enter the current year",
-                            keyboard));
+                    calender = getCalender(keyboard);
                 }
                 catch(Exception e)
                 {
@@ -55,10 +52,12 @@ public class Poulproj03 {
                 try
                 {
                     calender.advanceByOneDay();
+                    System.out.println("calender advanced");
                 }
                 catch(Exception e)
                 {
-                    System.out.println(e);
+                    System.out.println("try creating a calender before using " +
+                            "this function");
                 }
                 menu(keyboard);
                 break;
@@ -69,7 +68,8 @@ public class Poulproj03 {
                 }
                 catch(Exception e)
                 {
-                    System.out.println(e);
+                    System.out.println("try creating a calender before using " +
+                            "this function");
                 }
                 menu(keyboard);
                 break;
@@ -80,7 +80,8 @@ public class Poulproj03 {
                 }
                 catch(Exception e)
                 {
-                    System.out.println(e);
+                    System.out.println("try creating a calender before using " +
+                            "this function");
                 }
                 menu(keyboard);
                 break;
@@ -117,20 +118,33 @@ public class Poulproj03 {
         }
     }
     /*
-     * gets a positve integer from the user and returns it it prompts the user 
-     * with the message keyboard must be an initialized scanner instance
+     * calls the functions in the right order to be able to properly initialize 
+     * a calender instance and returns a reference to this instance the  
+     * parameter is an initialized Scanner instance
      */
-    public static int getPositiveInt(String message, Scanner keyboard)
+    public static Calender getCalender(Scanner keyboard)
+    {
+        int month, day, year;
+        month = getMonth(keyboard);
+        year = getYear(keyboard);
+        day = getDay(keyboard, month, year);
+        return new Calender(day, month , year);
+    }
+    /*
+     * prompts the user to enter a valid month and returns this value the 
+     * parameter is an initialized Scanner instance
+     */
+    private static int getMonth(Scanner keyboard)
     {
         try
         {
             int value;
-            System.out.println(message);
+            System.out.println("please enter a month:");
             value = keyboard.nextInt();
-            if(value < BADVALUESBEGIN)
+            if(value < 0 || value > 12)
             {
-                System.out.println("please enter a positive value");
-                return getPositiveInt(message, keyboard);
+                System.out.println("please enter an interger 1-12");
+                return getMonth(keyboard);
             }
             //else
             //base case
@@ -138,8 +152,52 @@ public class Poulproj03 {
         }
         catch(Exception e)
         {
-            return getPositiveInt(message, keyboard);
+            return getMonth(keyboard);
         }
     }
-    final static int BADVALUESBEGIN = 0;
+    /*
+     * prompts the user to enter a valid day based on the month and year
+     * and returns this value
+     */
+    private static int getDay(Scanner keyboard, int month, int year)
+    {
+        try
+        {
+            int value;
+            System.out.println("please enter a day:");
+            value = keyboard.nextInt();
+            if(value < 0 || value > Calender.numberOfDays(month, year))
+            {
+                System.out.println("please enter a valid number of days");
+                return getMonth(keyboard);
+            }
+            //else
+            //base case
+            return value;
+        }
+        catch(Exception e)
+        {
+            return getMonth(keyboard);
+        }
+    }
+    /*
+     * returns a valid value for a year to be used with the calender class
+     * will prompt the user to enter a year the parameter is an initialized 
+     * Scanner instance
+     */
+    private static int getYear(Scanner keyboard)
+    {
+        try
+        {
+            int value;
+            System.out.println("please enter the year:");
+            value = keyboard.nextInt();
+            return value;
+        }
+        catch(Exception e)
+        {
+            System.out.println("please enter a number");
+            return getYear(keyboard);
+        }
+    }
 }
