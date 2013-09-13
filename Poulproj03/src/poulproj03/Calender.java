@@ -6,16 +6,7 @@
 package poulproj03;
 
 /*
- *ADT
- * Calender
- * =============================================================================
- * -day_:integer 
- * -month_:integer
- * -year_:integer
- * =============================================================================
- * + advanceByOneDay():void
- * +toStringNumeralsAndSlashes():string {querey}
- * +toStringMDYText():string {query}
+ * the calender class is designed to be able to store and modify any valid date
  */
 public class Calender {
     private int day_;
@@ -30,44 +21,16 @@ public class Calender {
      */
     public Calender(int day, int month, int year)
     {
-        //year may be negative to represent BC
-        if(!(day >0 && month > 0))
-        {
-            throw new IllegalArgumentException("day and month must be positive")
-                    ;
-        }
-        else if(month > DEC)
-        {
-            throw new IllegalArgumentException("month must be less than 13");
-        }
-        //check that day is not too high
-        switch(month)
-        {
-            case APR:
-            case JUN:
-            case SEPT:
-            case NOV:
-                if(day > 30)
-                {
-                    throw new IllegalArgumentException("days must be less than "
-                            + "the days in the month");
-                }
-                break;
-            case FEB:
-                if((day >28)&&!LeapYear(year) || (day > 29) && LeapYear(year))
-                {
-                    throw new IllegalArgumentException("days must be less than "
-                            + "the days in the month");
-                }
-                break;
-            default:
-                if(day > 31)
-                {
-                    throw new IllegalArgumentException("days must be less than "
-                            + "the days in the month");
-                }
-                break;
-        }
+        //year can be negative to represent BC
+       if(month > 12 || month < 1)
+       {
+           throw new IllegalArgumentException("the month must be between "+
+                   "1 and 12");
+       }
+       if(day < 1 || day > numberOfDays(month, year))
+       {
+           throw new IllegalArgumentException("day must be in the month");
+       }
         day_ = day;
         month_ = month;
         year_ = year;
@@ -94,34 +57,7 @@ public class Calender {
     public void advanceByOneDay()
     {
         day_++;
-        if(day_ > 31)
-        {
-            day_ = 1;
-            month_++;
-            if(month_ > 12)
-            {
-                year_++;
-            }
-        }
-        else if(day_ > 30 && MonthHas30(month_))
-        {
-            day_ = 1;
-            month_++;
-            if(month_ > 12)
-            {
-                year_++;
-            }
-        }
-        else if(day_ > 29 && LeapYear(year_) && (month_ == FEB))
-        {
-            day_ = 1;
-            month_++;
-            if(month_ > 12)
-            {
-                year_++;
-            }
-        }
-        else if(day_ > 28 && !LeapYear(year_) && (month_ == FEB))
+        if(day_ > numberOfDays(month_, year_))
         {
             day_ = 1;
             month_++;

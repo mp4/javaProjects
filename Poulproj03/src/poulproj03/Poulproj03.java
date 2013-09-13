@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class Poulproj03 {
 
     /**
-     * @param args the command line arguments
+     * prints a greeting initializes a Scanner to the keyboard and calls the 
+     * menu
      */
     public static void main(String[] args) {
         System.out.println("welcome to the calender driver program");
@@ -41,6 +42,7 @@ public class Poulproj03 {
                 try
                 {
                     calender = getCalender(keyboard);
+                    System.out.println("calender created");
                 }
                 catch(Exception e)
                 {
