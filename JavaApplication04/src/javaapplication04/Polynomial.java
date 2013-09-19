@@ -31,10 +31,35 @@ public class Polynomial {
     public void setCoefficient(int coef, int power)
     {
         Node cur, prev;
+        cur = head;
+        if(cur == null)
+        {
+            head = new Node(coef, power);
+            return;
+        }
+        while(cur != null)
+        {
+            //add item if
+            if(cur.power_ > power)
+            {
+                prev.next_ = new Node(coef, power, cur);
+                return;
+            }
+            prev = cur;
+            cur = cur.next_;
+        }
+        prev.next_ = new Node(coef, power);
     }
     @Override public String toString()
     {
-        
+        String returnMe = "";
+        Node cur = head;
+        while(cur != null)
+        {
+            returnMe = returnMe + cur.coeff_ +"x^" + cur.power_;
+            cur = cur.next_;
+        }
+        return returnMe;
     }
 }
 class Node
