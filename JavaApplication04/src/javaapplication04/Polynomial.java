@@ -5,7 +5,7 @@
 package javaapplication04;
 
 /**
- * contains the polinomial and its associated node class
+ * contains the polynomial and its associated node class
  * @author marsh poulson 9/19/2013
  */
 public class Polynomial {
