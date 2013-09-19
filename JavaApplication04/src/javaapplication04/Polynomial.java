@@ -9,20 +9,28 @@ package javaapplication04;
  * @author marsh
  */
 public class Polynomial {
-    int degree_;
+    Integer degree_;
     Node head;
     
     public Polynomial()
     {
         
     }
-    int getCoefficient(int power)
+    public int getCoefficient(int power)
     {
-        
+        Node cur = head;
+        while(cur != null && cur.power_ <= power)
+        {
+            if(cur.power_ == power)
+            {
+                return cur.coeff_;
+            }
+            cur = cur.next_;
+        }
     }
-    void setCoefficient(int coef, int power)
+    public void setCoefficient(int coef, int power)
     {
-        
+        Node cur, prev;
     }
     @Override public String toString()
     {
