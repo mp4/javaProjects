@@ -27,28 +27,48 @@ public class Polynomial {
             }
             cur = cur.next_;
         }
+        return 0;
+    }
+    Node getCoefficientNode(int power)
+    {
+        Node cur = head;
+        while(cur != null && cur.power_ <= power)
+        {
+            if(cur.power_ == power)
+            {
+                return cur;
+            }
+            cur = cur.next_;
+        }
+        return null;
     }
     public void setCoefficient(int coef, int power)
     {
         Node cur, prev;
         cur = head;
-        if(cur == null)
+        if(getCoeffricentNode(power) == null)
         {
-            head = new Node(coef, power);
-            return;
-        }
-        while(cur != null)
-        {
-            //add item if
-            if(cur.power_ > power)
+                 if(cur == null)
             {
-                prev.next_ = new Node(coef, power, cur);
+                head = new Node(coef, power);
                 return;
             }
-            prev = cur;
-            cur = cur.next_;
+            while(cur != null)
+            {
+                //add item if
+                if(cur.power_ > power)
+                {
+                    prev.next_ = new Node(coef, power, cur);
+                    return;
+                }
+                prev = cur;
+                cur = cur.next_;
+            }
+            prev.next_ = new Node(coef, power);
+            return;
         }
-        prev.next_ = new Node(coef, power);
+        
+        getCoeffricentNode(power).coeff_ = coef;
     }
     @Override public String toString()
     {
