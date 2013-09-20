@@ -13,12 +13,14 @@ public class Poulproj04 {
      */
     public static void main(String[] args) {
         polynomial = new Polynomial();
+        polynomial2 = new Polynomial();
         System.out.println("welcome to the polynomial driver program");
         Scanner keyboard = new Scanner(System.in);
         menu(keyboard);
     }
     
     static Polynomial polynomial;
+    static Polynomial polynomial2;
     
     /*
      * this function accepts a scanner which should already be directed to the 
@@ -30,10 +32,13 @@ public class Poulproj04 {
         int choice;
         System.out.println("\nmenu");
         System.out.println("1) clear polynomial");
-        System.out.println("2) advance Calender by one day");
-        System.out.println("3) print current Calender date MM/DD/YYYY");
-        System.out.println("4) print current Calender date with month as text");
-        System.out.println("5) exit");
+        System.out.println("2) get coefficient");
+        System.out.println("3) set coefficient");
+        System.out.println("4) print polynomial");
+        System.out.println("5) evalutate polynomial");
+        System.out.println("6) swap active polynomials");
+        System.out.println("7) add polynomials active and inactive together");
+        System.out.println("8) exit");
         choice = getValidMenuInt(keyboard);
         System.out.println("");
         
@@ -44,49 +49,44 @@ public class Poulproj04 {
                 menu(keyboard);
                 break;
             case 2:
-                try
-                {
-                    calender.advanceByOneDay();
-                    System.out.println("calender advanced");
-                }
-                catch(Exception e)
-                {
-                    System.out.println("try creating a calender before using " +
-                            "this function");
-                }
+                 System.out.println("coefficient is: " +
+                        polynomial.getCoefficient(getInt(
+                        "please enter the power you want to display",
+                        keyboard)));
                 menu(keyboard);
                 break;
             case 3:
-                try
-                {
-                    System.out.println(calender.toStringNumeralsAndSlashes());
-                }
-                catch(Exception e)
-                {
-                    System.out.println("try creating a calender before using " +
-                            "this function");
-                }
+               polynomial.setCoefficient(getInt("please enter the coefficient",
+                       keyboard), getInt("please enter the power", keyboard));
                 menu(keyboard);
                 break;
             case 4:
-                try
-                {
-                    System.out.println(calender.toStringMDYText());
-                }
-                catch(Exception e)
-                {
-                    System.out.println("try creating a calender before using " +
-                            "this function");
-                }
+                System.out.println("p(x) = " + polynomial.toString());
                 menu(keyboard);
                 break;
             case 5:
-                //fallout of the menu
+                double evalAt = getDouble("please enter the value of x:",
+                        keyboard);
+                System.out.println("p(" + evalAt + ") = " + polynomial.evalute(evalAt));
+                menu(keyboard);
+                break;
+            case 6:
+                Polynomial temp = polynomial;
+                polynomial = polynomial2;
+                polynomial2 = temp;
+                menu(keyboard);
+                break;
+            case 7:
+                polynomial = polynomial.add(polynomial2);
+                polynomial2 = new Polynomial();
+                menu(keyboard);
+                break;
+            case 8:
                 break;
         } 
     }
     final static int MINMENUCHOICE = 1;
-    final static int MAXMENUCHOICE = 5;
+    final static int MAXMENUCHOICE = 8;
     /*
      * this function will prompt the user to enter a valid menu integer
      * and will return this value will reprompt as many times as necessary
@@ -129,6 +129,25 @@ public class Poulproj04 {
         catch(Exception e)
         {
             return getInt(message, keyboard);
+        }
+    }
+    /*
+     * gets an integer from the user and returns it it prompts the user 
+     * with the message keyboard must be an initialized scanner instance
+     */
+    public static double getDouble(String message, Scanner keyboard)
+    {
+        try
+        {
+            double value;
+            System.out.println(message);
+            value = keyboard.nextDouble();
+            
+            return value;
+        }
+        catch(Exception e)
+        {
+            return getDouble(message, keyboard);
         }
     }
 }
