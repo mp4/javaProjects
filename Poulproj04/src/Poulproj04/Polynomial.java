@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication04;
+package Poulproj04;
 
 /**
  * contains the polynomial and its associated node class
@@ -56,6 +56,7 @@ public class Polynomial {
     {
         //internal note if coef = 0 remove node
         Node cur, prev;
+        prev = null;
         cur = head;
         
         if(coef == 0)
@@ -78,7 +79,7 @@ public class Polynomial {
             return;
         }
         
-        if(getCoeffricentNode(power) == null)
+        if(getCoefficientNode(power) == null)
         {
                  if(cur == null)
             {
@@ -100,7 +101,7 @@ public class Polynomial {
             return;
         }
         
-        getCoeffricentNode(power).coeff_ = coef;
+        getCoefficientNode(power).coeff_ = coef;
     }
     /*
      * returns the polynomial in a string representation elements set to zero

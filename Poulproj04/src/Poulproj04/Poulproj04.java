@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication04;
+package Poulproj04;
 
 /**
  *
  * @author marsh
  */
-public class JavaApplication04 {
+public class Poulproj04 {
 
     /**
      * @param args the command line arguments
