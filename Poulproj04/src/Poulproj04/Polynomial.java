@@ -1,21 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package Poulproj04;
-
 /**
  * contains the polynomial and its associated node class
  * @author marsh poulson 9/19/2013
  */
+package Poulproj04;
+
 public class Polynomial {
     Integer degree_;
     Node head;
     
-    public Polynomial()
-    {
-        
-    }
     /*
      * returns the coefficient of a given power 
      */
