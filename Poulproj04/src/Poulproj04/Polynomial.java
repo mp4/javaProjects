@@ -73,38 +73,43 @@ public class Polynomial {
             return;
         }
         //check against degree and set if necessary
-        if (coef > degree_) {
+        if (coef > degree_) 
+        {
             degree_ = coef;
         }
-        if (getCoefficientNode(power) == null) {
-            if (cur == null) {
+        
+        if (getCoefficientNode(power) == null) 
+        {
+            if (cur == null) 
+            {
                 head = new Node(coef, power);
                 return;
             }
 
             prev = cur;
             cur = cur.next_;
-            while (cur != null) {
-
-                //add item if
-                if (prev.power_ < power) {
-                    prev.next_ = new Node(coef, power, cur);
-                    return;
-                }
+            //takes care of it if it is first element
+            if(power > prev.power_)
+            {
+                head = new Node(coef, power, head);
+                return;
+            }
+            while(cur != null && prev.power_ > power)
+            {
                 prev = cur;
                 cur = cur.next_;
             }
-            prev.next_ = new Node(coef, power);
+            prev.next_ = new Node(coef, power, cur);
             return;
         }
 
         getCoefficientNode(power).coeff_ = coef;
     }
+    
     /*
      * returns the polynomial in a string representation elements set to zero
      * will not be printed
      */
-
     @Override
     public String toString() {
         String returnMe = "";
@@ -121,35 +126,40 @@ public class Polynomial {
         }
         return returnMe;
     }
+    
     /*
      * evaluates the polynomial at the value x and returns the value it 
      * evaluates to
      */
-
-    public double evalute(double x) {
+    public double evalute(double x) 
+    {
         double sum = 0.0;
         Node cur = head;
-        while (cur != null) {
+        while (cur != null) 
+        {
             sum += cur.coeff_ * Math.pow(x, cur.power_);
             cur = cur.next_;
         }
         return sum;
     }
+    
     /*
      * adds two polynomials together and returns the result does not modify the 
      * original polynomial
      */
-
-    public Polynomial add(Polynomial other) {
+    public Polynomial add(Polynomial other) 
+    {
         Polynomial temp = new Polynomial();
-        //two lazy loops some things may be done twice
+        //two loops some things may be done twice
         Node cur = head;
-        while (cur != null) {
+        while (cur != null) 
+        {
             temp.setCoefficient(cur.coeff_, cur.power_);
             cur = cur.next_;
         }
         cur = other.head;
-        while (cur != null) {
+        while (cur != null) 
+        {
             temp.setCoefficient(cur.coeff_ + getCoefficient(cur.power_), cur.power_);
             cur = cur.next_;
         }
@@ -166,20 +176,22 @@ class Node {
     int coeff_;
     int power_;
     Node next_;
+    
     /*
      * Initializes a node with a coefficient and a power
      * next will remain null
      */
-
-    public Node(int coeff, int power) {
+    public Node(int coeff, int power) 
+    {
         coeff_ = coeff;
         power_ = power;
     }
+    
     /*
      *Initializes a node with a coefficient a power and which node it refers to
      */
-
-    public Node(int coeff, int power, Node next) {
+    public Node(int coeff, int power, Node next) 
+    {
         coeff_ = coeff;
         power_ = power;
         next_ = next;
