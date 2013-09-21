@@ -1,15 +1,22 @@
 /**
  * contains the driver program to test the polynomial class
- * @author marsh poulson 9/19/2013
+ * @author marsh poulson 9/20/2013
  */
 package Poulproj04;
 
 import java.util.Scanner;
 
+/*
+ * this class and its methods are the driver program to test out the polynomial 
+ * class contains two polynomials one of which is active and the other inactive
+ * unless otherwise specified all menu options apply only to the active 
+ * polynomial
+ */
 public class Poulproj04 {
 
     /**
-     * @param args the command line arguments
+     * the main function initializes both polynomials initializes a scanner and
+     * then calls the menu method
      */
     public static void main(String[] args) {
         polynomial = new Polynomial();
@@ -36,8 +43,8 @@ public class Poulproj04 {
         System.out.println("3) set coefficient");
         System.out.println("4) print polynomial");
         System.out.println("5) evalutate polynomial");
-        System.out.println("6) swap active polynomials");
-        System.out.println("7) add polynomials active and inactive together");
+        System.out.println("6) swap active and inactive polynomials");
+        System.out.println("7) adds active and inactive polynomials");
         System.out.println("8) exit");
         choice = getValidMenuInt(keyboard);
         System.out.println("");
@@ -67,18 +74,22 @@ public class Poulproj04 {
             case 5:
                 double evalAt = getDouble("please enter the value of x:",
                         keyboard);
-                System.out.println("p(" + evalAt + ") = " + polynomial.evalute(evalAt));
+                System.out.println("p(" + evalAt + ") = " + 
+                        polynomial.evalute(evalAt));
                 menu(keyboard);
                 break;
             case 6:
                 Polynomial temp = polynomial;
                 polynomial = polynomial2;
                 polynomial2 = temp;
+                System.out.println("polynomials switched");
                 menu(keyboard);
                 break;
             case 7:
                 polynomial = polynomial.add(polynomial2);
                 polynomial2 = new Polynomial();
+                System.out.println("polynomials added and inactive one cleared")
+                        ;
                 menu(keyboard);
                 break;
             case 8:
@@ -87,6 +98,7 @@ public class Poulproj04 {
     }
     final static int MINMENUCHOICE = 1;
     final static int MAXMENUCHOICE = 8;
+    
     /*
      * this function will prompt the user to enter a valid menu integer
      * and will return this value will reprompt as many times as necessary
@@ -112,6 +124,7 @@ public class Poulproj04 {
             return getValidMenuInt(keyboard);
         }
     }
+    
     /*
      * gets an integer from the user and returns it it prompts the user 
      * with the message keyboard must be an initialized scanner instance
@@ -131,8 +144,9 @@ public class Poulproj04 {
             return getInt(message, keyboard);
         }
     }
+    
     /*
-     * gets an integer from the user and returns it it prompts the user 
+     * gets a double from the user and returns it it prompts the user 
      * with the message keyboard must be an initialized scanner instance
      */
     public static double getDouble(String message, Scanner keyboard)

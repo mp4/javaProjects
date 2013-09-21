@@ -1,13 +1,14 @@
 /**
  * contains the polynomial and its associated node class
  *
- * @author marsh poulson 9/19/2013
+ * @author marsh poulson 9/20/2013
  */
 package Poulproj04;
-
-import sun.security.util.Length;
-
-public class Polynomial {
+/*
+ * this class is designed to represent a polynomial with its associated methods
+ */
+public class Polynomial 
+{
 
     int degree_;
     Node head;
@@ -15,58 +16,77 @@ public class Polynomial {
     /*
      * creates an empty polynomial of degree 0
      */
-    public Polynomial() {
+    public Polynomial() 
+    {
         this.degree_ = 0;
     }
 
     /*
      * returns the coefficient of a given power 
      */
-    public int getCoefficient(int power) {
+    public int getCoefficient(int power) 
+    {
         Node cur = head;
-        while (cur != null && cur.power_ >= power) {
-            if (cur.power_ == power) {
+        while (cur != null && cur.power_ >= power) 
+        {
+            if (cur.power_ == power) 
+            {
                 return cur.coeff_;
             }
             cur = cur.next_;
         }
         return 0;
     }
+    
     /*
      * returns the node with a given power returns null if not found
      */
-
-    Node getCoefficientNode(int power) {
+    Node getCoefficientNode(int power) 
+    {
         Node cur = head;
-        while (cur != null && cur.power_ >= power) {
-            if (cur.power_ == power) {
+        while (cur != null && cur.power_ >= power) 
+        {
+            if (cur.power_ == power) 
+            {
                 return cur;
             }
             cur = cur.next_;
         }
         return null;
     }
+    
     /*
      * sets the coeficient of a term given by the power if a node is set to
      * coefficent 0 it will not be printed
      */
-
-    public void setCoefficient(int coef, int power) {
+    public void setCoefficient(int coef, int power) 
+    {
         //internal note if coef = 0 remove node
         Node cur, prev;
         prev = null;
         cur = head;
 
-        if (coef == 0) {
-            while (cur != null && cur.power_ >= power) {
-                if (cur.power_ == power) {
+        if (coef == 0) 
+        {
+            if(power == degree_)
+            {
+                if(head.next_ == null)
+                    degree_ = 0;
+                else
+                    degree_ = head.next_.power_;
+            }
+            while (cur != null && cur.power_ >= power) 
+            {
+                if (cur.power_ == power) 
+                {
                     break;
                 }
                 prev = cur;
                 cur = cur.next_;
             }
 
-            if (cur != null) {
+            if (cur != null) 
+            {
                 prev.next_ = cur.next_;
             }
 
@@ -94,7 +114,7 @@ public class Polynomial {
                 head = new Node(coef, power, head);
                 return;
             }
-            while(cur != null && prev.power_ > power)
+            while(cur != null && cur.power_ > power)
             {
                 prev = cur;
                 cur = cur.next_;
@@ -160,18 +180,21 @@ public class Polynomial {
         cur = other.head;
         while (cur != null) 
         {
-            temp.setCoefficient(cur.coeff_ + getCoefficient(cur.power_), cur.power_);
+            //also nicely deletes added out coefficients
+            temp.setCoefficient(cur.coeff_ + getCoefficient(cur.power_),
+                    cur.power_);
             cur = cur.next_;
         }
         return temp;
     }
 }
+
 /*
  * the node class is used to store the nodes of a polynomial
  * will contain a power and a coefficient
  */
-
-class Node {
+class Node 
+{
 
     int coeff_;
     int power_;
