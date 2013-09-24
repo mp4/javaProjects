@@ -15,6 +15,8 @@ public class Creature {
     public void setMaze(Maze maze)
     {
         maze_ = maze;
+        x_ = maze.getStartX();
+        y_ = maze.getStartY();
     }
     
     public void moveNorth()
