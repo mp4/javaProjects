@@ -39,4 +39,8 @@ public class Creature {
     {
         maze_[x][y] = "m";//set this to the proper letter
     }
+    public int[] reportPosition()
+    {
+        return new int[]{x_, y_};
+    }
 }
