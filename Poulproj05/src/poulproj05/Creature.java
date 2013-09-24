@@ -19,29 +19,58 @@ public class Creature {
         y_ = maze.getStartY();
     }
     
-    public boolean moveNorth()
+    public static boolean goNorth(Maze maze, Creature creature)
     {
-        if(maze.isClear(x_, y_ +1))
+        boolean success;
+        if(maze.isClear(creature.x_, creature.y_ +1))
         {
-            y_++;
-            MarkPosition();
+            creature.y_++;
+            creature.MarkPosition();
+            if(maze_.atExit(x_, y_))
+                return true;
+            else
+            {
+                success = goNorth(maze, creature);
+                if(!success)
+                {
+                    success = goWest(maze, creature);
+                    if(!success)
+                    {
+                        success = goEast(maze, creature);
+                        if(!success)
+                        {
+                            success = goSouth(maze, creature);
+                            if(!success)
+                            {
+                                creature.MarkVisited();
+                                creature.y_--;
+                            }
+                        }
+                    }
+                }
+                
+            }
         }
     }
-    public boolean moveSouth()
+    public static boolean moveSouth(Maze maze, Creature creature)
     {
         
     }
-    public boolean moveWest()
+    public static boolean moveWest(Maze maze, Creature creature)
     {
         
     }
-    public boolean moveEast()
+    public static boolean moveEast(Maze maze, Creature creature)
     {
         
     }
     public void MarkPosition()
     {
         maze_[x][y] = Maze.PATH;//set this to the proper letter
+    }
+    public void MarkVisited()
+    {
+        maze_[x][y] = Maze.VISITED;
     }
     public int[] reportPosition()
     {
