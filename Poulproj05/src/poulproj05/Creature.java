@@ -19,19 +19,19 @@ public class Creature {
         y_ = maze.getStartY();
     }
     
-    public void moveNorth()
+    public boolean moveNorth()
     {
         
     }
-    public void moveSouth()
+    public boolean moveSouth()
     {
         
     }
-    public void moveWest()
+    public boolean moveWest()
     {
         
     }
-    public void moveEast()
+    public boolean moveEast()
     {
         
     }
