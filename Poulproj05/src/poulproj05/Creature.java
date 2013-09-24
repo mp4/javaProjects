@@ -21,7 +21,11 @@ public class Creature {
     
     public boolean moveNorth()
     {
-        
+        if(maze.isClear(x_, y_ +1))
+        {
+            y_++;
+            MarkPosition();
+        }
     }
     public boolean moveSouth()
     {
@@ -37,7 +41,7 @@ public class Creature {
     }
     public void MarkPosition()
     {
-        maze_[x][y] = "m";//set this to the proper letter
+        maze_[x][y] = Maze.PATH;//set this to the proper letter
     }
     public int[] reportPosition()
     {
