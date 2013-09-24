@@ -11,7 +11,16 @@ package poulproj05;
 public class Maze {
     private char[][] maze_;
     private Creature creature_;
+    private int startX, startY;
     
+    public int getStartX()
+    {
+        return startX;
+    }
+    public int getStartY()
+    {
+        return startY;
+    }
     public static Maze LoadFromFile(String file)
     {
         
