@@ -40,4 +40,10 @@ public class Maze {
     {
         this = Maze.LoadFromFile(file);
     }
+    public boolean squareIsClear(int x , int y)
+    {
+        if(maze_[x][y] = CLEAR)
+            return true;
+        return false;
+    }
 }
