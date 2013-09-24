@@ -9,7 +9,7 @@ package poulproj05;
  * @author marsh
  */
 public class Maze {
-    public static final char CLEAR = ' ', WALL = 'x', CREATURE = 'o', VISTITED = 'v';
+    public static final char CLEAR = ' ', WALL = 'x', CREATURE = 'o', VISTITED = 'v', PATH = 'p';
     private char[][] maze_;
     private Creature creature_;
     private int startX, startY;
