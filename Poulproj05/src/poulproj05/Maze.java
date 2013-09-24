@@ -12,7 +12,7 @@ public class Maze {
     public static final char CLEAR = ' ', WALL = 'x', CREATURE = 'o', VISTITED = 'v', PATH = 'p';
     private char[][] maze_;
     private Creature creature_;
-    private int startX, startY;
+    private int startX, startY, endX, endY;
     private final int height, width;
     
     public int getHeight()
@@ -44,6 +44,14 @@ public class Maze {
     {
         if(maze_[x][y] = CLEAR)
             return true;
+        return false;
+    }
+    public boolean atExit(int x, int y)
+    {
+        if(endX == x && endY == y)
+        {
+            return true;
+        }
         return false;
     }
 }
