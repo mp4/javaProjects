@@ -9,5 +9,15 @@ package poulproj05;
  * @author marsh
  */
 public class Maze {
+    private char[][] maze_;
+    private Creature creature_;
     
+    public static Maze LoadFromFile(String file)
+    {
+        
+    }
+    public Maze(file)
+    {
+        this = Maze.LoadFromFile(file);
+    }
 }
