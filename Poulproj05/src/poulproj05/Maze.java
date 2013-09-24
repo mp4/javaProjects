@@ -12,6 +12,16 @@ public class Maze {
     private char[][] maze_;
     private Creature creature_;
     private int startX, startY;
+    private final int height, width;
+    
+    public int getHeight()
+    {
+        return height;
+    }
+    public int getWidth()
+    {
+        return width;
+    }
     
     public int getStartX()
     {
