@@ -38,6 +38,14 @@ public class Maze {
     {
         return startY;
     }
+    public void markVisited(int x, int y)
+    {
+        maze_[x][y] = Maze.VISTITED;
+    }
+    public void markPath(int x, int y)
+    {
+        maze_[x][y] = Maze.PATH;
+    }
     /**
      *
      */

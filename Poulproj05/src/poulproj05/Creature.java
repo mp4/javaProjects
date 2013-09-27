@@ -21,12 +21,12 @@ public class Creature {
     
     public static boolean goNorth(Maze maze, Creature creature)
     {
-        boolean success;
+        boolean success = false;
         if(maze.isClear(creature.x_, creature.y_ +1))
         {
             creature.y_++;
-            creature.MarkPosition();
-            if(maze_.atExit(x_, y_))
+            maze.markPath(creature.x_, creature.y_);
+            if(maze.atExit(creature.x_, creature.y_))
                 return true;
             else
             {
@@ -42,7 +42,7 @@ public class Creature {
                             success = goSouth(maze, creature);
                             if(!success)
                             {
-                                creature.MarkVisited();
+                                maze.markVisited(creature.x_, creature.y_);
                                 creature.y_--;
                             }
                         }
@@ -51,26 +51,97 @@ public class Creature {
                 
             }
         }
+        return success;
     }
-    public static boolean moveSouth(Maze maze, Creature creature)
+    public static boolean goSouth(Maze maze, Creature creature)
     {
-        
+        boolean success = false;
+        if(maze.isClear(creature.x_, creature.y_ +1))
+        {
+            creature.y_++;
+            maze.markPath(creature.x_, creature.y_);
+            if(maze.atExit(creature.x_, creature.y_))
+                return true;
+            else
+            {
+                success = goWest(maze, creature);
+                if(!success)
+                {
+                    success = goEast(maze, creature);
+                    if(!success)
+                    {
+                        success = goSouth(maze, creature);
+                        if(!success)
+                        {
+                            maze.markVisited(creature.x_, creature.y_);
+                            creature.y_--;
+                        }
+                    }
+                }
+                
+            }
+        }
+        return success;
     }
-    public static boolean moveWest(Maze maze, Creature creature)
+    public static boolean goWest(Maze maze, Creature creature)
     {
-        
+        boolean success = false;
+        if(maze.isClear(creature.x_, creature.y_ +1))
+        {
+            creature.y_++;
+            maze.markPath(creature.x_, creature.y_);
+            if(maze.atExit(creature.x_, creature.y_))
+                return true;
+            else
+            {
+                success = goNorth(maze, creature);
+                if(!success)
+                {
+                    success = goWest(maze, creature);
+                    if(!success)
+                    {
+                        success = goSouth(maze, creature);
+                        if(!success)
+                        {
+                            maze.markVisited(creature.x_, creature.y_);
+                            creature.y_--;
+                        }
+                    }
+                }
+                
+            }
+        }
+        return success;
     }
-    public static boolean moveEast(Maze maze, Creature creature)
+    public static boolean goEast(Maze maze, Creature creature)
     {
-        
-    }
-    public void MarkPosition()
-    {
-        maze_[x][y] = Maze.PATH;//set this to the proper letter
-    }
-    public void MarkVisited()
-    {
-        maze_[x][y] = Maze.VISITED;
+        boolean success = false;
+        if(maze.isClear(creature.x_, creature.y_ +1))
+        {
+            creature.y_++;
+            maze.markPath(creature.x_, creature.y_);
+            if(maze.atExit(creature.x_, creature.y_))
+                return true;
+            else
+            {
+                success = goNorth(maze, creature);
+                if(!success)
+                {
+                    success = goEast(maze, creature);
+                    if(!success)
+                    {
+                        success = goSouth(maze, creature);
+                        if(!success)
+                        {
+                            maze.markVisited(creature.x_, creature.y_);
+                            creature.y_--;
+                        }
+                    }
+                }
+                
+            }
+        }
+        return success;
     }
     public int[] reportPosition()
     {
