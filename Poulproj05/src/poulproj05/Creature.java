@@ -6,7 +6,7 @@ package poulproj05;
 
 /**
  * the creature class to represent the creature that moves through the maze
- * north is y+, south y-, east x+, west x- 
+ * north is y+, south y-, east x+, west x- axes
  */
 public class Creature {
     private int x_, y_;
@@ -48,6 +48,10 @@ public class Creature {
         }
         return success;
     }
+    /*
+     * attempts to move the creature in the maze to the south and will also try
+     * all the other directions except north returns success
+     */
     public static boolean goSouth(Maze maze, Creature creature)
     {
         boolean success = false;
@@ -78,6 +82,10 @@ public class Creature {
         }
         return success;
     }
+    /*
+     * attempts to move the creature to the west in the maze 
+     * Returns success will attempt all directions except east
+     */
     public static boolean goWest(Maze maze, Creature creature)
     {
         boolean success = false;
@@ -108,6 +116,10 @@ public class Creature {
         }
         return success;
     }
+    /*
+     * returns the success attempt to move the creature to the east in the maze
+     * will attempt to move it to all directions except west 
+     */
     public static boolean goEast(Maze maze, Creature creature)
     {
         boolean success = false;
@@ -138,6 +150,10 @@ public class Creature {
         }
         return success;
     }
+    /*
+     * returns an array of length 2 the first index is the x position of the creature
+     * and the second index is the y value of the creature
+     */
     public int[] reportPosition()
     {
         return new int[]{x_, y_};
