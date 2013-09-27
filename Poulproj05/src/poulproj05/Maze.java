@@ -1,6 +1,7 @@
 /*
  * the maze contains squares that are clear, walls, path to exit and visited 
  * but not in final path
+ * marsh Poulson 9/26/2013
  */
 package poulproj05;
 
@@ -10,9 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.imageio.IIOException;
 
-/**
- *
- * @author marsh
+/*
+ * The class maze represents a maze and internally stores values for each of its squares
  */
 public class Maze {
     public static final char CLEAR = ' ', WALL = 'x', CREATURE = 'o', VISTITED = 'v', PATH = 'p';
@@ -21,33 +21,51 @@ public class Maze {
     private int startX, startY, endX, endY;
     private final int height, width;
     
+    /*
+     * returns the height of the maze
+     */
     public int getHeight()
     {
         return height;
     }
+    /*
+     * returns the width of the maze
+     */
     public int getWidth()
     {
         return width;
     }
-    
+    /*
+     * returns the x value of the starting location
+     */
     public int getStartX()
     {
         return startX;
     }
+    /*
+     * returns the y value for the starting position 
+     */
     public int getStartY()
     {
         return startY;
     }
+    /*
+     * mark position x, y as visited 
+     */
     public void markVisited(int x, int y)
     {
         maze_[x][y] = Maze.VISTITED;
     }
+    /*
+     * Mark the position x, y as the path
+     */
     public void markPath(int x, int y)
     {
         maze_[x][y] = Maze.PATH;
     }
-    /**
-     *
+    /*
+     * Instantiated a maze from a given file throws exceptions if the file
+     * is not in the correct format
      */
     public Maze(String file) throws FileNotFoundException, IOException
     {
@@ -95,12 +113,18 @@ public class Maze {
         }
         fileIn.close();
     }
+    /*
+     * returns whether or not a square is clear given by x, y
+     */
     public boolean isClear(int x , int y)
     {
         if(maze_[x][y] == CLEAR)
             return true;
         return false;
     }
+    /*
+     * returns true if the coordinates x, y are the exit
+     */
     public boolean atExit(int x, int y)
     {
         if(endX == x && endY == y)
