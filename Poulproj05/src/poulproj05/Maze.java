@@ -112,6 +112,7 @@ public class Maze {
             }
         }
         fileIn.close();
+        creature_ = new Creature(startX, startY);
     }
     /*
      * returns whether or not a square is clear given by x, y
@@ -132,5 +133,23 @@ public class Maze {
             return true;
         }
         return false;
+    }
+    
+    @Override public String toString()
+    {
+        String returnMe = new String();
+        for(int i=0; i < height; i++)
+        {
+            for(int k=0; k < width; k++)
+            {
+                returnMe = returnMe + maze_[i][k];
+            }
+            returnMe = returnMe + "\n";
+        }
+        return returnMe;
+    }
+    public boolean runCreature()
+    {
+        return Creature.goNorth(this, creature_);
     }
 }
