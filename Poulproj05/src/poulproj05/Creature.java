@@ -1,16 +1,19 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Contains the creature class partially specified in the project description
+ * by marsh Poulson 9/27/2013
  */
 package poulproj05;
 
 /**
- *
- * @author marsh
+ * the creature class to represent the creature that moves through the maze
+ * north is y+, south y-, east x+, west x- 
  */
 public class Creature {
     private int x_, y_;
-    
+    /*
+     * returns the success of attempting to move the creature through the maze
+     * attempt to go north first and then attempts to move in all of the other directions
+     */
     public static boolean goNorth(Maze maze, Creature creature)
     {
         boolean success = false;
