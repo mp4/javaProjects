@@ -10,14 +10,6 @@ package poulproj05;
  */
 public class Creature {
     private int x_, y_;
-    private Maze maze_;
-    
-    public void setMaze(Maze maze)
-    {
-        maze_ = maze;
-        x_ = maze.getStartX();
-        y_ = maze.getStartY();
-    }
     
     public static boolean goNorth(Maze maze, Creature creature)
     {
