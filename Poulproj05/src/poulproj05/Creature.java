@@ -10,6 +10,12 @@ package poulproj05;
  */
 public class Creature {
     private int x_, y_;
+    
+    public Creature(int x, int y)
+    {
+        x_ = x;
+        y_ = y;
+    }
     /*
      * returns the success of attempting to move the creature through the maze
      * attempt to go north first and then attempts to move in all of the other directions
@@ -55,9 +61,9 @@ public class Creature {
     public static boolean goSouth(Maze maze, Creature creature)
     {
         boolean success = false;
-        if(maze.isClear(creature.x_, creature.y_ +1))
+        if(maze.isClear(creature.x_, creature.y_ -1))
         {
-            creature.y_++;
+            creature.y_--;
             maze.markPath(creature.x_, creature.y_);
             if(maze.atExit(creature.x_, creature.y_))
                 return true;
@@ -73,7 +79,7 @@ public class Creature {
                         if(!success)
                         {
                             maze.markVisited(creature.x_, creature.y_);
-                            creature.y_--;
+                            creature.y_++;
                         }
                     }
                 }
@@ -89,9 +95,9 @@ public class Creature {
     public static boolean goWest(Maze maze, Creature creature)
     {
         boolean success = false;
-        if(maze.isClear(creature.x_, creature.y_ +1))
+        if(maze.isClear(creature.x_ -1, creature.y_))
         {
-            creature.y_++;
+            creature.x_--;
             maze.markPath(creature.x_, creature.y_);
             if(maze.atExit(creature.x_, creature.y_))
                 return true;
@@ -107,7 +113,7 @@ public class Creature {
                         if(!success)
                         {
                             maze.markVisited(creature.x_, creature.y_);
-                            creature.y_--;
+                            creature.x_++;
                         }
                     }
                 }
@@ -123,9 +129,9 @@ public class Creature {
     public static boolean goEast(Maze maze, Creature creature)
     {
         boolean success = false;
-        if(maze.isClear(creature.x_, creature.y_ +1))
+        if(maze.isClear(creature.x_ + 1, creature.y_))
         {
-            creature.y_++;
+            creature.x_++;
             maze.markPath(creature.x_, creature.y_);
             if(maze.atExit(creature.x_, creature.y_))
                 return true;
@@ -141,7 +147,7 @@ public class Creature {
                         if(!success)
                         {
                             maze.markVisited(creature.x_, creature.y_);
-                            creature.y_--;
+                            creature.x_--;
                         }
                     }
                 }
