@@ -4,6 +4,12 @@
  */
 package poulproj05;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.imageio.IIOException;
+
 /**
  *
  * @author marsh
@@ -32,17 +38,58 @@ public class Maze {
     {
         return startY;
     }
-    public static Maze LoadFromFile(String file)
+    /**
+     *
+     */
+    public Maze(String file) throws FileNotFoundException, IOException
     {
+        BufferedReader fileIn = new BufferedReader(new FileReader(file));
+        String heightWidth = fileIn.readLine();
+        String[] hw = heightWidth.split(" ");
+        if(hw.length != 2)
+        {
+            throw new IIOException("file is not of the correct format");
+        }
+        height = Integer.parseInt(hw[0]);
+        width = Integer.parseInt(hw[1]);
         
+        maze_ = new char[height][width];
+        
+        //get exit from file
+        String[] exit = fileIn.readLine().split(" ");
+        if(exit.length != 2)
+        {
+            throw new IIOException("file is not of the correct format");
+        }
+        endX = Integer.parseInt(exit[0]);
+        endY = Integer.parseInt(exit[1]);
+        
+        //get start from file
+        String[] start = fileIn.readLine().split(" ");
+        if(start.length != 2)
+        {
+            throw new IIOException("file is not of the correct format");
+        }
+        startX = Integer.parseInt(start[0]);
+        startY = Integer.parseInt(start[1]);
+        
+        //now read in values
+        for(int i= 0; i < height; i++)
+        {
+            String line = fileIn.readLine();
+            for(int k=0; k< width; k++)
+            {
+                maze_[i][k] = line.charAt(k);
+                //verify value here
+                
+                
+            }
+        }
+        fileIn.close();
     }
-    public Maze(file)
+    public boolean isClear(int x , int y)
     {
-        this = Maze.LoadFromFile(file);
-    }
-    public boolean squareIsClear(int x , int y)
-    {
-        if(maze_[x][y] = CLEAR)
+        if(maze_[x][y] == CLEAR)
             return true;
         return false;
     }
