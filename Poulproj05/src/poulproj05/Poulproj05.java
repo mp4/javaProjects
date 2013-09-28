@@ -29,7 +29,14 @@ public class Poulproj05 {
             String file = scanner.nextLine();
             System.out.println("filepath:" + file);
             maze = new Maze(file);
-            maze.runCreature();
+            if(maze.runCreature())
+            {
+                System.out.println("maze solution");
+            }
+            else
+            {
+                System.out.println("no solution");
+            }
             System.out.println(maze.toString());
         }
         catch(Exception e)

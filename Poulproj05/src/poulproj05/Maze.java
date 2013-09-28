@@ -116,9 +116,12 @@ public class Maze {
     }
     /*
      * returns whether or not a square is clear given by x, y
+     * if not in the maze is not clear
      */
     public boolean isClear(int x , int y)
     {
+        if(x >= width || x < 0 || y >= height || y < 0)
+            return false;
         if(maze_[x][y] == CLEAR)
             return true;
         return false;
@@ -150,6 +153,9 @@ public class Maze {
     }
     public boolean runCreature()
     {
-        return Creature.goNorth(this, creature_);
+        return Creature.goNorth(this, creature_) || 
+                Creature.goSouth(this, creature_) ||
+                Creature.goEast(this, creature_) ||
+                Creature.goWest(this, creature_);
     }
 }
