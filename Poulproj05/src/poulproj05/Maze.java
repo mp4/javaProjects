@@ -98,18 +98,30 @@ public class Maze {
         }
         startX = Integer.parseInt(start[0]);
         startY = Integer.parseInt(start[1]);
-        
-        //now read in values
-        for(int i= 0; i < height; i++)
+        try
         {
-            String line = fileIn.readLine();
-            for(int k=0; k< width; k++)
+            //now read in values
+            for(int i= 0; i < height; i++)
             {
-                maze_[i][k] = line.charAt(k);
-                //verify value here
-                
-                
+                String line = fileIn.readLine();
+                for(int k=0; k< width; k++)
+                {
+                    maze_[i][k] = line.charAt(k);
+                    //verify value here
+                    if(!(line.charAt(k) == CLEAR || line.charAt(k) == WALL))
+                    {
+                        throw new IOException("maze should only be composed of x "+
+                                "and \' \' found" + line.charAt(k));
+                    }
+                }
             }
+        }
+        catch(Exception e)
+        {
+            //get the right message out of this part of the program
+            if(e == null)
+                throw new IOException("maze file is corrupt");
+            throw e;
         }
         fileIn.close();
         creature_ = new Creature(startX, startY);
@@ -138,6 +150,9 @@ public class Maze {
         return false;
     }
     
+    /*
+     * returns the string representation of the maze
+     */
     @Override public String toString()
     {
         String returnMe = new String();
@@ -151,6 +166,10 @@ public class Maze {
         }
         return returnMe;
     }
+    /*
+     * runs the creature through the maze will modify the maze
+     * returns if it was successful false means there is no way to the exit
+     */
     public boolean runCreature()
     {
         return Creature.goNorth(this, creature_) || 

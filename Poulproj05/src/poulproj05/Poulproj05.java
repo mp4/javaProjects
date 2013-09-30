@@ -19,7 +19,12 @@ public class Poulproj05 {
         
         getMazeFile();
     }
-    
+    /*
+     * attempts to get a valid maze file goes until it gets one from the user
+     * will prompt the user to enter this file and then will display whether
+     * or not there was a solution and if there is will print the maze with 
+     * the path of the solution and all paths tried
+     */
     public static void getMazeFile()
     {
         try
