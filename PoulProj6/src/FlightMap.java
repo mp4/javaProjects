@@ -2,6 +2,8 @@ import java.lang.*;
 
 public class FlightMap
 {
+	LinkedList<City>[] adjacencyList;
+	
 	public FlightMap()
 	{
 		
