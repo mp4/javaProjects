@@ -19,21 +19,21 @@ public class Maze {
     private char[][] maze_;
     private Creature creature_;
     private int startX, startY, endX, endY;
-    private final int height, width;
+    private final int width, height;
     
     /*
      * returns the height of the maze
      */
     public int getHeight()
     {
-        return height;
+        return width;
     }
     /*
      * returns the width of the maze
      */
     public int getWidth()
     {
-        return width;
+        return height;
     }
     /*
      * returns the x value of the starting location
@@ -76,10 +76,10 @@ public class Maze {
         {
             throw new IIOException("file is not of the correct format");
         }
-        height = Integer.parseInt(hw[1]);
-        width = Integer.parseInt(hw[0]);
+        width = Integer.parseInt(hw[1]);
+        height = Integer.parseInt(hw[0]);
         
-        maze_ = new char[height][width];
+        maze_ = new char[width][height];
         
         //get exit from file
         String[] exit = fileIn.readLine().split(" ");
@@ -101,10 +101,10 @@ public class Maze {
         try
         {
             //now read in values
-            for(int i= 0; i < height; i++)
+            for(int i= 0; i < width; i++)
             {
                 String line = fileIn.readLine();
-                for(int k=0; k< width; k++)
+                for(int k=0; k< height; k++)
                 {
                     maze_[i][k] = line.charAt(k);
                     //verify value here
@@ -132,7 +132,7 @@ public class Maze {
      */
     public boolean isClear(int x , int y)
     {
-        if(x >= height || x < 0 || y >= width || y < 0)
+        if(x >= width || x < 0 || y >= height || y < 0)
             return false;
         if(maze_[x][y] == CLEAR)
             return true;
@@ -156,9 +156,9 @@ public class Maze {
     @Override public String toString()
     {
         String returnMe = new String();
-        for(int i=0; i < height; i++)
+        for(int i=0; i < width; i++)
         {
-            for(int k=0; k < width; k++)
+            for(int k=0; k < height; k++)
             {
                 returnMe = returnMe + maze_[i][k];
             }
