@@ -76,8 +76,8 @@ public class Maze {
         {
             throw new IIOException("file is not of the correct format");
         }
-        height = Integer.parseInt(hw[0]);
-        width = Integer.parseInt(hw[1]);
+        height = Integer.parseInt(hw[1]);
+        width = Integer.parseInt(hw[0]);
         
         maze_ = new char[height][width];
         
@@ -132,7 +132,7 @@ public class Maze {
      */
     public boolean isClear(int x , int y)
     {
-        if(x >= width || x < 0 || y >= height || y < 0)
+        if(x >= height || x < 0 || y >= width || y < 0)
             return false;
         if(maze_[x][y] == CLEAR)
             return true;
