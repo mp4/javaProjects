@@ -4,6 +4,7 @@
  */
 package poulproj06;
 
+import java.util.LinkedList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,9 +58,11 @@ public class FlightMapTest {
     public void testDisplayAllCities() {
         System.out.println("displayAllCities");
         FlightMap instance = new FlightMap();
+        instance.adjacencyList[0] = (LinkedList<City>)new LinkedList();
+        instance.adjacencyList[0].add(new City("someCity"));
         instance.displayAllCities();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -68,11 +71,16 @@ public class FlightMapTest {
     @Test
     public void testDisplayAdjacentCities() {
         System.out.println("displayAdjacentCities");
-        City aCity = null;
+        City aCity = new City("someCity");
         FlightMap instance = new FlightMap();
+        instance.adjacencyList[0] = (LinkedList<City>)new LinkedList();
+        instance.adjacencyList[0].add(new City("someCity"));
+        instance.adjacencyList[0].add(new City("second City"));
+        instance.adjacencyList[0].add(new City("third City"));
         instance.displayAdjacentCities(aCity);
+        System.out.println("");
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -95,7 +103,9 @@ public class FlightMapTest {
     public void testUnVisitAll() {
         System.out.println("unVisitAll");
         FlightMap instance = new FlightMap();
+        instance.visitedList[0] = true;
         instance.unVisitAll();
+        if(instance.visitedList[0] == true)
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -121,10 +131,15 @@ public class FlightMapTest {
     @Test
     public void testInsertAdjacentCity() {
         System.out.println("insertAdjacentCity");
-        City aCity = null;
-        City adjactentCity = null;
+        City aCity = new City("someCity");
+        City adjactentCity = new City("ThirdCity");
         FlightMap instance = new FlightMap();
+        instance.adjacencyList[0] = (LinkedList<City>)new LinkedList();
+        instance.adjacencyList[0].addFirst(new City("someCity"));
+        instance.adjacencyList[0].addLast(new City("second City"));
         instance.insertAdjacentCity(aCity, adjactentCity);
+        instance.displayAdjacentCities(aCity);
+        if(!instance.adjacencyList[0].get(2).equals(adjactentCity))
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
