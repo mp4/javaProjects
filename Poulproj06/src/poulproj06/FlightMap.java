@@ -21,25 +21,66 @@ public class FlightMap
 	LinkedList<City>[] adjacencyList;
         boolean[] visitedList;
 	private final int MAXSIZE = 20;
+	/*
+	 * creates a new instance of a flightmap initializes the proper internal variables
+	 */
 	public FlightMap()
 	{
 		adjacencyList = new LinkedList[MAXSIZE];
                 visitedList = new boolean[MAXSIZE];
 	}
-	
+	/*
+	 * reads in a cityfile which is alist of all the cites that will be serviced 
+	 * and the reads in a list of all the flights associated with given pairs of
+	 * cities
+	 */
 	public void readInFlightMap(String cityFileName, String flightFileName) 
                 throws FileNotFoundException, IOException
 	{
             BufferedReader fileIn = new BufferedReader(
                     new FileReader(cityFileName));
+            try
+            {
+            	int i = 0;
+            	while(true)
+            	{
+            		String line = fileIn.getLine();
+            		adjacencyList[i] = (LinkedList<City>)new LinkedList();
+            		adjacencyList[i].add(line);
+            		i++;
+            	}
+            	
+            }
+            catch(Exception e)
+            {
+            	//maybe change to eof error we are done with the loop
+            	;
+            }
             
             fileIn.close();
             
             fileIn = new BufferedReader(new FileReader(flightFileName));
-            
+            try
+            {
+            	int i = 0;
+            	while(true)
+            	{
+            		String line = fileIn.getLine();
+            		String[] cites = line.Split(",");
+            		//add code to find and add city to proper place
+            		
+            		i++;
+            	}
+            }
+            catch(Exception e)
+            {
+            	
+            }
             fileIn.close();
 	}
-	
+	/*
+	 * outputs to the user all the cities serviced by hpair
+	 */
 	public void displayAllCities()
 	{
 		for(int i=0; i< MAXSIZE; i++)
@@ -48,6 +89,9 @@ public class FlightMap
 			System.out.println(adjacencyList[i].get(0));
 		}
 	}
+	/*
+	 * outputs to the user all the cities that are adjacent to a given city
+	 */
 	public void displayAdjacentCities(City aCity)
 	{
 		for(int i=1; i < adjacencyList[findIndex(aCity)].size() ; i++)
@@ -55,6 +99,9 @@ public class FlightMap
                     System.out.println(adjacencyList[findIndex(aCity)].get(i));
 		}
 	}
+	/*
+	 * marks a given city as visited
+	 */
 	public void markVisited(City aCity)
 	{
 		int index  = findIndex(aCity);
@@ -64,15 +111,23 @@ public class FlightMap
                 }
                 visitedList[index] = true;
 	}
+	/*
+	 * unvisits all the cities that currently have been marked as visited
+	 */
 	public void unVisitAll()
 	{
 		visitedList = new boolean[MAXSIZE];
 	}
-	
+	/*
+	 * returns whether or not a city has been visited yet
+	 */
 	public boolean isVisited(City aCity)
 	{
 		return visitedList[findIndex(aCity)];
 	}
+	/*
+	 * inserts the adjacent city into the list of cities serviced by aCity
+	 */
 	public void insertAdjacentCity(City aCity, City adjactentCity)
 	{
 		int index = findIndex(aCity);
@@ -82,6 +137,9 @@ public class FlightMap
                 }
                 adjacencyList[index].addLast(aCity);
 	}
+	/*
+	 * returns the next unvisited city from the fromCity specified
+	 */
 	public City getNextCity( City fromCity)
 	{
 		return null;
