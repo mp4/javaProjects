@@ -4,6 +4,10 @@
  */
 package poulproj06;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.*;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -23,9 +27,17 @@ public class FlightMap
                 visitedList = new boolean[MAXSIZE];
 	}
 	
-	public void readInFlightMap(String cityFileName, String flightFileName)
+	public void readInFlightMap(String cityFileName, String flightFileName) 
+                throws FileNotFoundException, IOException
 	{
-		
+            BufferedReader fileIn = new BufferedReader(
+                    new FileReader(cityFileName));
+            
+            fileIn.close();
+            
+            fileIn = new BufferedReader(new FileReader(flightFileName));
+            
+            fileIn.close();
 	}
 	
 	public void displayAllCities()
