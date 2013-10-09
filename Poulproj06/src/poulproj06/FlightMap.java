@@ -6,6 +6,7 @@ package poulproj06;
 
 import java.lang.*;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class FlightMap
 {
@@ -58,7 +59,7 @@ public class FlightMap
 	
 	public boolean isVisited(City aCity)
 	{
-		return false;
+		return visitedList[findIndex(aCity)];
 	}
 	public void insertAdjacentCity(City aCity, City adjactentCity)
 	{
@@ -98,8 +99,8 @@ public class FlightMap
 	  markVisited(originCity);
 	
 	  topCity = (City)(stack.peek());
-	  while (!stack.isEmpty() &&
-	         (topCity.compareTo(destinationCity) != 0)) {
+	  while (!stack.empty() &&
+	         (topCity.equals(destinationCity))) {
 	    // loop invariant: stack contains a directed path
 	    // from the origin city at the bottom of the stack
 	    // to the city at the top of the stack
