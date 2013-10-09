@@ -89,11 +89,15 @@ public class FlightMapTest {
     @Test
     public void testMarkVisited() {
         System.out.println("markVisited");
-        City aCity = null;
+        City aCity = new City("test");
         FlightMap instance = new FlightMap();
+        instance.adjacencyList[0] = (LinkedList<City>)new LinkedList();
+        instance.adjacencyList[0].add(new City("test"));
+        
         instance.markVisited(aCity);
+        if(visitedList[0] == false)
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+            fail("The test failed");
     }
 
     /**
