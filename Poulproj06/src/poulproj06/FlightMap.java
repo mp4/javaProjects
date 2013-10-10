@@ -44,9 +44,9 @@ public class FlightMap
             	int i = 0;
             	while(true)
             	{
-            		String line = fileIn.getLine();
+            		String line = fileIn.readLine();
             		adjacencyList[i] = (LinkedList<City>)new LinkedList();
-            		adjacencyList[i].add(line);
+            		adjacencyList[i].add(new City(line));
             		i++;
             	}
             	
@@ -65,8 +65,8 @@ public class FlightMap
             	int i = 0;
             	while(true)
             	{
-            		String line = fileIn.getLine();
-            		String[] cites = line.Split(",");
+            		String line = fileIn.readLine();
+            		String[] cites = line.split(",");
             		//add code to find and add city to proper place
             		
             		i++;

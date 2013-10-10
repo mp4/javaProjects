@@ -4,6 +4,8 @@
  */
 package poulproj06;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,7 +43,8 @@ public class FlightMapTest {
      * Test of readInFlightMap method, of class FlightMap.
      */
     @Test
-    public void testReadInFlightMap() {
+    public void testReadInFlightMap() throws FileNotFoundException, IOException 
+    {
         System.out.println("readInFlightMap");
         String cityFileName = "";
         String flightFileName = "";
@@ -95,7 +98,7 @@ public class FlightMapTest {
         instance.adjacencyList[0].add(new City("test"));
         
         instance.markVisited(aCity);
-        if(visitedList[0] == false)
+        if(instance.visitedList[0] == false)
         // TODO review the generated test code and remove the default call to fail.
             fail("The test failed");
     }
