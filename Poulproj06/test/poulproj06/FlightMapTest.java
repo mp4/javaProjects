@@ -123,7 +123,7 @@ public class FlightMapTest {
     @Test
     public void testIsVisited() {
         System.out.println("isVisited");
-        City aCity = null;
+        City aCity = new City("some city");
         FlightMap instance = new FlightMap();
         boolean expResult = false;
         boolean result = instance.isVisited(aCity);

@@ -204,10 +204,11 @@ public class FlightMap
 	{
 		for(int i=0; i < adjacencyList.length; i++)
                 {
-                    if(city.equals(adjacencyList[i].get(0)))
-                    {
-                        return i;
-                    }
+                    if(adjacencyList[i] != null)
+                        if(city.equals(adjacencyList[i].get(0)))
+                        {
+                            return i;
+                        }
                 }
                 return -1;
 	}
