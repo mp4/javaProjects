@@ -135,7 +135,7 @@ public class FlightMap
                 {
                     throw new IllegalArgumentException("aCity not found");
                 }
-                adjacencyList[index].addLast(aCity);
+                adjacencyList[index].addLast(adjactentCity);
 	}
 	/*
 	 * returns the next unvisited city from the fromCity specified
