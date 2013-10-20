@@ -40,7 +40,8 @@ public class Queue<T> {
      */
     public void enqueue(T itemToAdd)
     {
-        if(tail == null)
+        //tail will never be null so check head
+        if(head == null)
         {
             head = tail = new Node(itemToAdd);
             return;
