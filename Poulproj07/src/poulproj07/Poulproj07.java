@@ -1,20 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * this file contains the driver program for the queue class
+ * by marsh poulson 10/22/2013
  */
 package poulproj07;
 
 import java.util.Scanner;
 
-/**
- *
- * @author marsh
+/*
+ * the main class designed to hold the driver program, main, the menu and the 
+ * funticions that the menu needs to verify user input
  */
 public class Poulproj07 {
 
     static Queue<String> queue;
     /**
-     * @param args the command line arguments
+     * outputs a greeting to the user initializes a queue and Scanner to the
+     * keyboard and then calls the menu
      */
     public static void main(String[] args)
     {
