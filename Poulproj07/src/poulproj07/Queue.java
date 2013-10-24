@@ -1,6 +1,6 @@
 /**
  *this file contains the queue class it is a reference based implementation
- * @author marsh poulson 10/19/2013
+ * @author marsh poulson 10/23/2013
  */
 package poulproj07;
 
@@ -47,6 +47,8 @@ public class Queue<T> {
             return;
         }
         tail.next = new Node(itemToAdd);
+        //dont forget to increment tail
+        tail = tail.next;
     }
     /*
      * removes and returns an item from the queue throws an exception if the 
