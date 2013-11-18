@@ -18,9 +18,13 @@ public class Poulproj10 {
      * @param args the command line arguments
      */
     static PriorityQueue<Float> priorityQueue;
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("welcome to the priority queue driver");
+        priorityQueue = new PriorityQueue<>();
+        Scanner keyboard = new Scanner(System.in);
+        menu(keyboard);
     }
     /*
      * this function accepts a scanner which should already be directed to the 
@@ -41,18 +45,29 @@ public class Poulproj10 {
         switch(choice)
         {
             case 1:
-
+                float value = getValidFloat(keyboard, 
+                        "please enter the value:");
+                int priority = getValidInt(keyboard, 
+                        "please enter its priority:");
+                priorityQueue.Add(value, priority);
                 menu(keyboard);
                 break;
             case 2:
-   
+                try
+                {
+                    System.out.println(priorityQueue.Remove());
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
                 menu(keyboard);
                 break;
             case 3:
                 System.out.println(priorityQueue.isEmpty());
                 menu(keyboard);
                 break;
-            case 5:
+            case 4:
                 //fallout of the menu
                 break;
         } 
@@ -83,6 +98,48 @@ public class Poulproj10 {
         catch(Exception e)
         {
             return getValidMenuInt(keyboard);
+        }
+    }
+    /*
+     * this function will prompt the user to enter a valid int
+     * and will return this value will reprompt as many times as necessary
+     * the parameter is an initialized instance of a scanner and the message
+     * that will be displayed
+     */
+    public static int getValidInt(Scanner keyboard, String message)
+    {
+        try
+        {
+            int value;
+            System.out.println(message);
+            value = keyboard.nextInt();
+            keyboard.nextLine();//purges \n from the stream
+            return value;
+        }
+        catch(Exception e)
+        {
+            return getValidInt(keyboard, message);
+        }
+    }
+    /*
+     * this function will prompt the user to enter a valid float
+     * and will return this value will reprompt as many times as necessary
+     * the parameter is an initialized instance of a scanner and the message 
+     * that will be displayed
+     */
+    public static float getValidFloat(Scanner keyboard, String message)
+    {
+        try
+        {
+            float value;
+            System.out.println(message);
+            value = keyboard.nextFloat();
+            keyboard.nextLine();//purges \n from the stream
+            return value;
+        }
+        catch(Exception e)
+        {
+            return getValidFloat(keyboard, message);
         }
     }
 }
