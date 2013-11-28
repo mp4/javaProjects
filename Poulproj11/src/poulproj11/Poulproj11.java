@@ -35,7 +35,7 @@ public class Poulproj11 {
         System.out.println("\nmenu");
         System.out.println("1) add");
         System.out.println("2) remove");
-        System.out.println("3) is empty");
+        System.out.println("3) print all");
         System.out.println("4) exit");
         choice = getValidMenuInt(keyboard);
         System.out.println("");
@@ -43,7 +43,7 @@ public class Poulproj11 {
         switch(choice)
         {
             case 1:
-                
+                AddToTable(keyboard);
                 menu(keyboard);
                 break;
             case 2:
@@ -58,6 +58,8 @@ public class Poulproj11 {
                 menu(keyboard);
                 break;
             case 3:
+                
+                table.outputAllSymbols();
                 menu(keyboard);
                 break;
             case 4:
@@ -93,7 +95,7 @@ public class Poulproj11 {
             return getValidMenuInt(keyboard);
         }
     }
-    public void AddToTable(Scanner keyboard)
+    public static void AddToTable(Scanner keyboard)
     {
         try
         {

@@ -15,15 +15,24 @@ public class SymbolTable {
 
     static final int EMPTY_ALWAYS = 0, FULL = 1, EMPTY_NOW = 2, SIZE = 1009, MAX_STEP = 14;
 
+    /*
+     * the Node class to store all of the links in the hash table
+     */
     class Node {
 
         String data;
         int status;
 
+        /*
+         * constructs a node with a status of empty
+         */
         public Node() {
             status = EMPTY_ALWAYS;
         }
 
+        /*
+         * constructs a node with the item in it and a status of full
+         */
         public Node(String item) {
             data = item;
             status = FULL;
@@ -31,21 +40,31 @@ public class SymbolTable {
     }
     ArrayList<Node> symbols;
 
+    /*
+     * constructs a new symbol 
+     */
     public SymbolTable() {
         symbols = new ArrayList<>(SIZE);
     }
 
+    /*
+     * the first hash funtion to calculate the initial position of an item
+     */
     private int hash1(String data) {
         return data.hashCode() % SIZE;
     }
 
+    /*
+     * the second rehashing function to calculate the offset based on the 
+     * string
+     */
     private int hash2(String data) {
         return MAX_STEP - (data.hashCode() % (MAX_STEP - 1));
     }
+    
     /*
      * returns wheter or not a string is a valid java identifier
      */
-
     static boolean validJavaIdentifier(String identifier) {
         //exclude reserved words
         if (identifier.equals("abstract") || identifier.equals("continue")
