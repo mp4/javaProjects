@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * contains the driver program to demonstrate the symbol table 
+ * by marsh poulson 12/04/2013
  */
 
 package poulproj11;
@@ -9,20 +8,20 @@ package poulproj11;
 import java.util.Scanner;
 
 /**
- *
- * @author marsh
+ * contains the driver program to test my symbol table program and helper
+ * programs
  */
 public class Poulproj11 {
 
     static SymbolTable table;
     /**
-     * @param args the command line arguments
+     * initializes the table outputs a greeting to the user and then calls the
+     * menu
      */
     public static void main(String[] args) {
         table = new SymbolTable();
         Scanner keyboard = new Scanner(System.in);
         menu(keyboard);
-        // TODO code application logic here
     }
         /*
      * this function accepts a scanner which should already be directed to the 
@@ -43,13 +42,20 @@ public class Poulproj11 {
         switch(choice)
         {
             case 1:
-                AddToTable(keyboard);
+                try
+                {
+                    table.Add(getValidJavaID(keyboard));
+                }
+                catch(IllegalAccessException e)
+                {
+                    System.out.println(e);
+                }
                 menu(keyboard);
                 break;
             case 2:
                 try
                 {
-                    
+                    table.deleteSymbol(getValidJavaID(keyboard));
                 }
                 catch(Exception e)
                 {
@@ -68,7 +74,7 @@ public class Poulproj11 {
         } 
     }
     final static int MINMENUCHOICE = 1;
-    final static int MAXMENUCHOICE = 5;
+    final static int MAXMENUCHOICE = 4;
     /*
      * this function will prompt the user to enter a valid menu integer
      * and will return this value will reprompt as many times as necessary
@@ -92,21 +98,23 @@ public class Poulproj11 {
         }
         catch(Exception e)
         {
+            keyboard.nextLine();
             return getValidMenuInt(keyboard);
         }
     }
-    public static void AddToTable(Scanner keyboard)
+    /*
+     * this function will prompt the user to enter a valid java identifier
+     * and will return this value will reprompt as many times as necessary
+     * the parameter is an initialized instance of a scanner
+     */
+    public static String getValidJavaID(Scanner keyboard)
     {
-        try
-        {
-            System.out.println("please enter a vaild java identifier:");
-            String identifier = keyboard.nextLine();
-            table.Add(identifier);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-            AddToTable(keyboard);
-        }
-    }
+        String value;
+        System.out.println("please enter a java identifier:");
+        value = keyboard.nextLine();
+        if(SymbolTable.validJavaIdentifier(value))
+            return value;
+        else
+            return getValidJavaID(keyboard);
+    }    
 }

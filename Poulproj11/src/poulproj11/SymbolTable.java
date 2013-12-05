@@ -1,15 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * contains the Symbol table class which is designed to represent a java 
+ * compliers symbol table
+ * by marsh poulson 12/04/2013 
  */
 package poulproj11;
 
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 
 /**
- *
- * @author marsh
+ * represents a java compilers symbol table 
  */
 public class SymbolTable {
 
@@ -45,13 +45,18 @@ public class SymbolTable {
      */
     public SymbolTable() {
         symbols = new ArrayList<>(SIZE);
+        //should be unnecessary
+        for(int i =0; i< SIZE; i++)
+        {
+            symbols.add(new Node());
+        }
     }
 
     /*
      * the first hash funtion to calculate the initial position of an item
      */
     private int hash1(String data) {
-        return data.hashCode() % SIZE;
+        return abs(data.hashCode() % SIZE);
     }
 
     /*
@@ -124,6 +129,10 @@ public class SymbolTable {
             throw new IllegalArgumentException(
                     "item must be a valid java identifier");
         }
+        if(inTable(item))
+        {
+            return;
+        }
         switch (symbols.get(hash1(item)).status) {
             case EMPTY_ALWAYS:
                 symbols.add(hash1(item), new Node(item));
@@ -152,7 +161,8 @@ public class SymbolTable {
                 symbols.add(index, new Node(item));
                 break;
             default:
-                throw new IllegalAccessException("the status of the location is not valid");
+                throw new IllegalAccessException(
+                        "the status of the location is not valid");
         }
 
     }
@@ -166,5 +176,58 @@ public class SymbolTable {
                 System.out.println(symbols.get(i).data);
             }
         }
+    }
+    /*
+     * deletes a given symbol from the symbol table
+    */
+    public void deleteSymbol(String symbol)
+    {
+        int hash = hash1(symbol);
+        int index = hash;
+        int offset = hash2(symbol);
+        
+        while(symbols.get(hash).status != EMPTY_ALWAYS)
+        {
+            if(symbols.get(hash).data.equals(symbol) && 
+                    symbols.get(hash).status != EMPTY_NOW)
+            {
+                symbols.get(hash).status = EMPTY_NOW;
+                symbols.get(hash).data = null;
+                return;
+            }
+            if(hash == index)
+            {
+                throw new ArrayIndexOutOfBoundsException(
+                        "the item was not found to delete");
+            }
+            
+            hash += offset;
+        }
+        throw new ArrayIndexOutOfBoundsException(
+                "the item was not found to delete");
+    }
+    /*
+     * returns whether or not a given identifier is in the symbol table
+     */
+    public boolean inTable(String identifier)
+    {
+        int hash = hash1(identifier);
+        int step = hash2(identifier);
+        int index = hash;
+        
+        while(symbols.get(index).status != EMPTY_ALWAYS)
+        {
+            if(symbols.get(index).status == FULL && 
+                    symbols.get(index).data.equals(identifier))
+            {
+                return true;
+            }
+            if(index == hash)
+            {
+                return false;
+            }
+            index += step;
+        }
+        return false;
     }
 }
